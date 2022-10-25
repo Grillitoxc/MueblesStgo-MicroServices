@@ -1,0 +1,60 @@
+:root {
+  --dark: #16191c;
+  --dark-x: #1e2126;
+  --light: #ffffff;
+}
+
+body {
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 300;
+  color: var(--light);
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 300;
+}
+
+.bg-dark {
+  background-color: var(--dark) !important;
+}
+
+.bg-dark-x {
+  background-color: var(--dark-x) !important;
+}
+
+.form-control,
+.btn {
+  min-height: 3.125rem;
+  line-height: initial;
+}
+
+.img-1 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/crafting.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.img-2 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/handyman.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.img-3 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/carpenter.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.img-4 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/working.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.img-5 {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/planning.jpg');
+  background-size: cover;
+  background-position: center;
+}
