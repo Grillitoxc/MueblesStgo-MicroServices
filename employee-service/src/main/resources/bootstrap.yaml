@@ -7,7 +7,7 @@ spring:
       uri: http://localhost:8081
   datasource:
     url: jdbc:postgresql://localhost:5432/mueblesstgo-employee
-    username: root
+    username: postgres
     password: 93304596
   jpa:
     hibernate:
