@@ -1,29 +1,60 @@
 package Tingeso2Microservices.clockservice.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 @Service
 public class UploadTimestampsService {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public void saveFile(MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                String folder = "clock-service//src//main//resources//static//uploads//";
-                Path path = Paths.get(folder + file.getOriginalFilename());
-                Files.write(path, bytes);
-                logger.info("Archivo guardado.");
-            } catch (Exception e) {
-                logger.error("Error al guardar el archivo.");
+    private Path fileStorageLocation;
+
+    @Autowired
+    public void FileStorageService(UploadTimestampsConfig fileStorageProperties) {
+        this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+
+        try {
+            Files.createDirectories(this.fileStorageLocation);
+        } catch (Exception ex) {
+            throw new UploadTimestampsException("Could not create the directory where the uploaded files will be stored.");
+        }
+    }
+
+    // function to store de file
+    public String storeFile(MultipartFile file) {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        try {
+            Path targetLocation = this.fileStorageLocation.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            return fileName;
+        } catch (IOException ex) {
+            throw new UploadTimestampsException("Could not store file " + fileName + ". Please try again!", ex);
+        }
+    }
+
+    // function to read the file
+    public Resource loadFileAsResource(String fileName) {
+        try {
+            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if(resource.exists()) {
+                return resource;
+            } else {
+                throw new MyFileNotFoundException("File not found " + fileName);
             }
+        } catch (MalformedURLException ex) {
+            throw new MyFileNotFoundException("File not found " + fileName, ex);
         }
     }
 }
