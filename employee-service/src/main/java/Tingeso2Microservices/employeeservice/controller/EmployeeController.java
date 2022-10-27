@@ -1,6 +1,6 @@
 package Tingeso2Microservices.employeeservice.controller;
 
-import Tingeso2Microservices.employeeservice.entity.Employee;
+import Tingeso2Microservices.employeeservice.entity.EmployeeEntity;
 import Tingeso2Microservices.employeeservice.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,8 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<Employee>> getAll() {
-        List<Employee> employees = employeeService.getAllEmployees();
+    public ResponseEntity<List<EmployeeEntity>> getAll() {
+        List<EmployeeEntity> employees = employeeService.getAllEmployees();
         if (employees.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(employees);

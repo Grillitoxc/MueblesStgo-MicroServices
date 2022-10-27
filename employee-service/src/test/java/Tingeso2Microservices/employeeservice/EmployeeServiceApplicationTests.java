@@ -1,6 +1,6 @@
 package Tingeso2Microservices.employeeservice;
 
-import Tingeso2Microservices.employeeservice.entity.Employee;
+import Tingeso2Microservices.employeeservice.entity.EmployeeEntity;
 import Tingeso2Microservices.employeeservice.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ class EmployeeTest {
 
 	@Test
 	void insert() {
-		Employee employee = new Employee();
+		EmployeeEntity employee = new EmployeeEntity();
 		employee.setName("Vaninaxc");
 		employee.setRut("21.014.566-4");
 		employeeRepository.save(employee);
