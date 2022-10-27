@@ -15,37 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/clock")
 public class ClockController {
     @Autowired
     UploadTimestampsService uploadTimestampsService;
 
-    @PutMapping
+    @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = uploadTimestampsService.storeFile(file);
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/files/")
-                .path(fileName)
-                .toUriString();
-        FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        FileResponse fileResponse = new FileResponse(fileName, file.getContentType(), file.getSize());
         return new ResponseEntity<FileResponse>(fileResponse, HttpStatus.OK);
     }
-
-    @GetMapping("/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        Resource resource = uploadTimestampsService.loadFileAsResource(fileName);
-        String contentType = null;
-        try {
-            contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
-        } catch (IOException ex) {
-            System.out.println("Could not determine file type.");
-        }
-        if(contentType == null) {
-            contentType = "application/octet-stream";
-        }
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .body(resource);
-    }
-
 }

@@ -2,6 +2,8 @@
   --dark: #16191c;
   --dark-x: #1e2126;
   --light: #ffffff;
+  --orange: #ff4400;
+  --light-green: #00ff00;
 }
 
 body {
@@ -14,6 +16,59 @@ h1 {
   font-size: 3rem;
   font-weight: 300;
 }
+
+input[type='file'] {
+  display: none;
+}
+
+.upload {
+  color: var(--orange);
+  height: 60px;
+  width: 250px;
+  background-color: var(--light);
+  position: aboslute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.upload:hover {
+  background-color: var(--orange);
+  color: var(--light);
+}
+
+.btn-circle.btn-xl {
+  background-color: var(--orange);
+  width: 70px;
+  height: 70px;
+  position: aboslute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 100%;
+  border-color: var(--orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-circle.btn-xl:hover {
+  background-color: var(--light);
+  border-color: var(--light);
+  color: var(--orange);
+}
+
 
 .bg-dark {
   background-color: var(--dark) !important;

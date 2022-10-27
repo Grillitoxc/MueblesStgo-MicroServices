@@ -1,35 +1,40 @@
 import React, { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const CLOCK_UPLOAD_API_URL = "http://localhost:8080/clock/upload";
+import '../assets/css/style.css';
 
 function UploadService() {
-    const [archivo, setArchivos] = useState([null]);
+    const [file, setFile] = useState();
 
-    const subirArchivo = (e) => {
-        setArchivos(e);
-    }
-
-    const enviarArchivo = async () => {
-        const f = new FormData();
-        f.append("file", archivo[0]);
-
-        await axios.post(CLOCK_UPLOAD_API_URL, f, {headers: {"Content-Type": "multipart/form-data"}}).then((response) => {
-            console.log(response);
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    const uploadFile = async () => {
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const API_URL = "http://localhost:8080/clock";
+            await axios.post(API_URL, formData);
+        } catch (err) {
+            alert(err.message);
+        }
+    };
 
     return (
         <div>
-            <h1>Upload File Component</h1>
-            <div className='Form'>
-                <input type='file' name='file' onChange={(e) => { subirArchivo(e.target.files[0]) }} />
-                <button onClick={enviarArchivo}>Enviar</button>
-            </div>
+            <br />
+            <input id='file' type='file' name='file' multiple onChange={(e) => setFile(e.target.files[0])} />
+            <label class="upload" for='file'>
+                <span class="material-symbols-outlined" style={{ fontSize: '1.8rem' }}>
+                    upload_file
+                </span>
+                seleccionar archivo
+            </label>
+            <br />
+            <button type="button" class="btn btn-danger btn-circle btn-xl">
+                <span class="material-symbols-outlined" style={{ fontSize: '1.8rem' }} onClick={uploadFile}>
+                    publish
+                </span>
+            </button>
         </div>
+
     );
 }
 
