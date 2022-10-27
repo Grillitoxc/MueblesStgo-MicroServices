@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CarouselComponent from './CarouselComponent'
+import UploadFileComponent from './UploadFileComponent'
 
 class HomeComponent extends Component {
     constructor(props) {
@@ -18,11 +19,14 @@ class HomeComponent extends Component {
                 </div>
                 <div class="col-lg-5 bg-dark d-flex flex-column align-items-end min-vh-100">
                     <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 mb-auto w-100">
-                        <img src="https://i.imgur.com/cApEoul.png" alt="logo" class="img-fluid"/>
+                        <img src="https://i.imgur.com/cApEoul.png" alt="logo" class="img-fluid" />
                     </div>
                     <div class="align-self-center w-100 px-lg-5 py-lg-4 p-4">
                         <h1 class="text-center">Calculadora de sueldos</h1>
                         {/* Aquí va el formulario de ingreso de archivo*/}
+                        <br />
+                        <UploadFileComponent />
+                        <br />
                         <form class="mb-5">
                             <div class="mb-4">
                                 <label for="exampleInputEmail1" class="form-label font-weight-bold">Email</label>

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: employee-service
+    name: clock-service
   cloud:
     config:
       enabled: true
@@ -12,3 +12,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+file:
+  upload-dir: ./static/uploads
