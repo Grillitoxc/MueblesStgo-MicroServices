@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
@@ -24,7 +24,7 @@ public class ClockController {
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = uploadTimestampsService.storeFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/upload/")
+                .path("/files/")
                 .path(fileName)
                 .toUriString();
         FileResponse fileResponse = new FileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
@@ -32,7 +32,7 @@ public class ClockController {
     }
 
     @GetMapping("/{fileName:.+}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServlet request) {
+    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         Resource resource = uploadTimestampsService.loadFileAsResource(fileName);
         String contentType = null;
         try {
