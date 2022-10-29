@@ -23,3 +23,7 @@ spring:
           uri: lb://clock-service
           predicates:
             - Path=/clock/**
+        - id: justifier-service
+          uri: lb://justifier-service
+          predicates:
+            - Path=/justifier/**
