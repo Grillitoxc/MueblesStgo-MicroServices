@@ -15,4 +15,8 @@ public class EmployeeService {
     public List<EmployeeEntity> getAllEmployees() {
         return employeeRepository.findAll();
     }
+
+    public Long findIdByRut(String rut) {
+        return employeeRepository.findIdByRut(rut);
+    }
 }

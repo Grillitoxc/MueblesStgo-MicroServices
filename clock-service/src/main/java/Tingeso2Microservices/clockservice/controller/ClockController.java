@@ -26,6 +26,7 @@ public class ClockController {
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = uploadTimestampsService.storeFile(file);
         FileResponse fileResponse = new FileResponse(fileName, file.getContentType(), file.getSize());
+        uploadTimestampsService.readFile();
         return new ResponseEntity<FileResponse>(fileResponse, HttpStatus.OK);
     }
 }

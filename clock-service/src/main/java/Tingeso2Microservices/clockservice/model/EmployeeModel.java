@@ -3,11 +3,18 @@ package Tingeso2Microservices.clockservice.model;
 import lombok.*;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeModel {
+    @Id
+    @Getter
+    @Setter
+    @Column(unique = true, nullable = true)
+    private Long id;
+
     @Getter
     @Setter
     @Column(unique = true, nullable = false)
