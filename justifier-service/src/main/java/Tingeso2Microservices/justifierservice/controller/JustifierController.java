@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/justifier")
 public class JustifierController {
     @Autowired
@@ -17,9 +16,9 @@ public class JustifierController {
 
     @PostMapping
     public ResponseEntity<JustifierEntity> saveJustifier(@RequestBody JustifierEntity justifier) {
-        JustifierEntity justifierNew = justifierService.setJustifier(justifier);
+        justifierService.setJustifier(justifier);
         System.out.println(justifier);
-        return ResponseEntity.ok(justifierNew);
+        return ResponseEntity.ok(justifier);
     }
 
     @GetMapping

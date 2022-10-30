@@ -20,6 +20,78 @@ input[type='file'] {
   display: none;
 }
 
+option {
+  color: var(--light);
+  /* change the color of the selected option */
+  background-color: var(--dark-x);
+  font-size: 1rem;
+}
+
+/* Form-Select style */
+.form-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 3rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--light);
+  background-color: var(--dark-x);
+  border: 1px solid var(--dark-x);
+  border-radius: 0.25rem;
+  outline: none;
+  cursor: pointer;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-jh {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 3rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--light);
+  background-color: var(--dark-x);
+  border-radius: 0.25rem;
+  outline: none;
+  cursor: pointer;
+  color: var(--light);
+  padding: 0.5rem 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-jh::placeholder {
+  color: var(--light);
+}
+
+.sendJustifier {
+  color: var(--orange);
+  height: 40px;
+  width: 210px;
+  background-color: var(--light);
+  position: aboslute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.sendJustifier:hover {
+  background-color: var(--orange);
+  color: var(--light);
+}
+
+
 .upload {
   color: var(--orange);
   height: 60px;
@@ -119,6 +191,8 @@ input[type='file'] {
   min-height: 3.125rem;
   line-height: initial;
 }
+
+
 
 .img-1 {
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95)), url('../images/crafting.jpg');

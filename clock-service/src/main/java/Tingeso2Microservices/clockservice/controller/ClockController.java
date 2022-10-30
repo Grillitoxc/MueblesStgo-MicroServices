@@ -16,14 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/clock")
 public class ClockController {
     @Autowired
     UploadTimestampsService uploadTimestampsService;
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = uploadTimestampsService.storeFile(file);
         FileResponse fileResponse = new FileResponse(fileName, file.getContentType(), file.getSize());

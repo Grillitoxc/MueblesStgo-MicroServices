@@ -17,13 +17,11 @@ public class JustifierService {
     /*-----------------*/
     /* SAVE JUSTIFIERS */
     /*-----------------*/
-    public JustifierEntity setJustifier(JustifierEntity justifier) {
+    public void setJustifier(JustifierEntity justifier) {
         if (verifyDate(justifier.getDate()) && (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())) == null) ||
                 (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())).getDiscount() == 15)) {
             justifierRepository.save(justifier);
-            return justifier;
         }
-        return null;
     }
 
     /*--------------------------*/

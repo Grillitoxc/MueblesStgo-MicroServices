@@ -28,6 +28,7 @@ function UploadService() {
                 seleccionar archivo
             </label>
             <br />
+            <br />
             <button type="button" className="btn btn-danger btn-circle btn-xl">
                 <span className="material-symbols-outlined" style={{ fontSize: '1.8rem' }} onClick={uploadFile}>
                     publish

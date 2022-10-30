@@ -23,13 +23,16 @@ class UploadFileComponent extends Component {
                     </div>
                     <div className="align-self-center w-100 px-lg-5 py-lg-4 p-4">
                         <h1 className="text-center">Subir archivos</h1>
+                        <br />
                         <h4 className="text-center">El archivo debe seguir el formato establecido, donde la primera columna
                             es la fecha de la marca de reloj, la segunda columna la hora de entrada o salida y la tercera
                             columna es el rut del empleado.</h4>
+                        <br />
                         <UploadService />
                     </div>
 
                     <div className="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 mt-auto w-100">
+                        <br />
                         <Link to="/justifier-and-extra-hours" className="btn justifierandextrahours">Ingresar justificativos y horas extra</Link>
                     </div>
                 </div>
