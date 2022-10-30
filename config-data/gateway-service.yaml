@@ -19,10 +19,10 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-          allowed-origins: "*"
-          allowed-methods: "*"
-          allowed-headers: "*"
-          allow-credentials: true
+            allowed-origins: "*"
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
       routes:
         - id: employee-service
           uri: lb://employee-service

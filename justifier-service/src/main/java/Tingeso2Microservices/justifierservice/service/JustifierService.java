@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class JustifierService {
     @Autowired
@@ -15,11 +17,13 @@ public class JustifierService {
     /*-----------------*/
     /* SAVE JUSTIFIERS */
     /*-----------------*/
-    public void setJustifier(JustifierEntity justifier) {
+    public JustifierEntity setJustifier(JustifierEntity justifier) {
         if (verifyDate(justifier.getDate()) && (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())) == null) ||
                 (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())).getDiscount() == 15)) {
             justifierRepository.save(justifier);
+            return justifier;
         }
+        return null;
     }
 
     /*--------------------------*/
@@ -66,5 +70,9 @@ public class JustifierService {
     public ClockModel findByDateAndEmployeeId(String date, Long id) {
         date = date.replace("/", "-");
         return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
+    }
+
+    public List<JustifierEntity> getAllJustifiers() {
+        return justifierRepository.findAll();
     }
 }

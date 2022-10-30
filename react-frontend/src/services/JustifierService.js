@@ -4,8 +4,12 @@ const JUSTIFIER_URL = "http://localhost:8080/justifier";
 
 class JustifierService {
     
-    postjustifier(justifier){
-        return axios.post("http://localhost:8080/justifier", justifier);
+    postJustifier(justifier){
+        return axios.post(JUSTIFIER_URL, justifier);
+    }
+
+    getJustifiers(){
+        return axios.get(JUSTIFIER_URL);
     }
 }
 

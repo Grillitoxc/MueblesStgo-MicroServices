@@ -31,13 +31,12 @@ class JustifierAndExtraHoursComponent extends Component {
 
     sendJustifier = (e) => {
         e.preventDefault();
-        let justifier = {
+        let justifierNew = {
             name: this.justifier.name,
             fecha: this.justifier.fecha
         };
-        console.log('justifier => ' + JSON.stringify(justifier));
-        JustifierService.postjustifier(justifier).then(res => {
-            console.log('justifier => ' + JSON.stringify(justifier));
+        console.log('justifierNew => ' + JSON.stringify(justifierNew));
+        JustifierService.postJustifier(justifierNew).then(res => {
             this.props.history.push('/justifier-and-extra-hours');
         });
     }
