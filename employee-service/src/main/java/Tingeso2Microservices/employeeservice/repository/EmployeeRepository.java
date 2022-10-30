@@ -9,5 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
     @Query(value = "SELECT id FROM employee WHERE rut = ?1", nativeQuery = true)
     Long findIdByRut(String rut);
+
+    @Query(value = "SELECT id FROM employee WHERE name = ?1", nativeQuery = true)
+    Long findIdByName(String name);
 }
 

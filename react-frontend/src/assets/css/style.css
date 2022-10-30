@@ -68,6 +68,43 @@ input[type='file'] {
   color: var(--orange);
 }
 
+.justifierandextrahours {
+  color: var(--light);
+  height: 20px;
+  width: 340px;
+  background-color: var(--dark);
+  position: aboslute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.justifierandextrahours:hover {
+  color: var(--orange);
+  height: 20px;
+  width: 340px;
+  background-color: var(--light);
+  position: aboslute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
 .bg-dark {
   background-color: var(--dark) !important;

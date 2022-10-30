@@ -19,4 +19,7 @@ public class EmployeeService {
     public Long findIdByRut(String rut) {
         return employeeRepository.findIdByRut(rut);
     }
+
+    public Long findIdByName(String name) { return employeeRepository.findIdByName(name);
+    }
 }

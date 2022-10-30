@@ -15,11 +15,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 import java.util.Scanner;
 
 @Service
 public class UploadTimestampsService {
 
+    /*--------------*/
+    /* FILE SECTION */
+    /*--------------*/
     private Path fileStorageLocation;
 
     @Autowired
@@ -32,7 +36,6 @@ public class UploadTimestampsService {
         }
     }
 
-    // function to store de file
     public String storeFile(MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         try {
@@ -44,32 +47,7 @@ public class UploadTimestampsService {
         }
     }
 
-    RestTemplate restTemplate = new RestTemplate();
-    public Long findIdByRut(String rut) {
-        return restTemplate.getForObject("http://localhost:8080/employee/find_id_by_rut/" + rut, Long.class);
-    }
-
-    public int calculateDiscount(String hourImput) {
-        int hour = Integer.parseInt(hourImput.substring(0, 2));
-        int minutes = Integer.parseInt(hourImput.substring(3, 5));
-        if (hour == 8 && minutes > 10 && minutes <= 25)
-            return 1;
-        else if (hour == 8 && minutes > 25 && minutes <= 45)
-            return 3;
-        else if ((hour == 8 && minutes > 45 && minutes <= 59) || (hour == 9 && minutes < 10))
-            return 6;
-        else if (hour > 9)
-            return -1;
-        else
-            return 0;
-    }
-
-    // function to read the file
-    @Autowired
-    private ClockRepository clockRepository;
-
     public void readFile() {
-        // find the route of the file Data.txt
         String filePath = "./src/main/resources/static/uploads/Data.txt";
         File file = new File(filePath);
         String dateTemp = "";
@@ -83,7 +61,7 @@ public class UploadTimestampsService {
                 dateTemp = line.substring(0, 10);
                 checkInTemp = line.substring(11, 16);
                 rutTemp = line.substring(17, 29);
-                if (clockRepository.findByDateAndId(dateTemp, findIdByRut(rutTemp)) == null) {
+                if (findByDateAndEmployeeId(dateTemp, findIdByRut(rutTemp)) == null) {
                     clockTemp.setDate(dateTemp);
                     clockTemp.setCheckInTime(checkInTemp);
                     clockTemp.setIdEmployee(findIdByRut(rutTemp));
@@ -103,5 +81,44 @@ public class UploadTimestampsService {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    /*--------------------------*/
+    /* STANDARD SERVICE METHODS */
+    /*--------------------------*/
+    @Autowired
+    private ClockRepository clockRepository;
+
+    public ClockEntity findByDateAndIdEmployee(String date, Long id) {
+        return clockRepository.findByDateAndIdEmployee(date, id);
+    }
+
+    public int calculateDiscount(String hourImput) {
+        int hour = Integer.parseInt(hourImput.substring(0, 2));
+        int minutes = Integer.parseInt(hourImput.substring(3, 5));
+        if (hour == 8 && minutes > 10 && minutes <= 25)
+            return 1;
+        else if (hour == 8 && minutes > 25 && minutes <= 45)
+            return 3;
+        else if ((hour == 8 && minutes > 45 && minutes <= 59) || (hour == 9 && minutes < 10))
+            return 6;
+        else if (hour > 9)
+            return -1;
+        else
+            return 0;
+    }
+
+    /*---------------*/
+    /* REST TEMPLATE */
+    /*---------------*/
+    RestTemplate restTemplate = new RestTemplate();
+
+    public Long findIdByRut(String rut) {
+        return restTemplate.getForObject("http://localhost:8080/employee/find_id_by_rut/" + rut, Long.class);
+    }
+
+    public ClockEntity findByDateAndEmployeeId(String date, Long id) {
+        date = date.replace("/", "-");
+        return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockEntity.class);
     }
 }

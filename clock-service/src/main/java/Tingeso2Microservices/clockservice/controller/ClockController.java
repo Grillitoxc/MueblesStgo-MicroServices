@@ -1,5 +1,6 @@
 package Tingeso2Microservices.clockservice.controller;
 
+import Tingeso2Microservices.clockservice.entity.ClockEntity;
 import Tingeso2Microservices.clockservice.service.FileResponse;
 import Tingeso2Microservices.clockservice.service.UploadTimestampsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,13 @@ public class ClockController {
     public ResponseEntity<FileResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = uploadTimestampsService.storeFile(file);
         FileResponse fileResponse = new FileResponse(fileName, file.getContentType(), file.getSize());
-        uploadTimestampsService.readFile();
         return new ResponseEntity<FileResponse>(fileResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("find_by_date_and_id/{date}/{id}")
+    public ResponseEntity<ClockEntity> findByDateAndEmployeeId(@PathVariable("date") String date, @PathVariable("id") Long id) {
+        date = date.replace("-", "/");
+        ClockEntity clock = uploadTimestampsService.findByDateAndIdEmployee(date, id);
+        return ResponseEntity.ok(clock);
     }
 }

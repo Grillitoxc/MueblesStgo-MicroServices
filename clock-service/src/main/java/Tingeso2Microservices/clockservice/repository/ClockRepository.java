@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClockRepository extends JpaRepository<ClockEntity, Long> {
-    ClockEntity findByDateAndId(String date, Long id);
+    ClockEntity findByDateAndIdEmployee(String date, Long id);
 }
