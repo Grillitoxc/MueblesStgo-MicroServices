@@ -40,3 +40,7 @@ spring:
           uri: lb://extrahours-service
           predicates:
             - Path=/extrahours/**
+        - id: spreadsheet-service
+          uri: lb://spreadsheet-service
+          predicates:
+            - Path=/spreadsheet/**

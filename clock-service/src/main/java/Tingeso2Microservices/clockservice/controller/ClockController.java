@@ -4,16 +4,10 @@ import Tingeso2Microservices.clockservice.entity.ClockEntity;
 import Tingeso2Microservices.clockservice.service.FileResponse;
 import Tingeso2Microservices.clockservice.service.UploadTimestampsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/clock")

@@ -55,6 +55,10 @@ public class JustifierService {
         return yearInt >= 2022 && monthInt >= 1 && monthInt <= 12 && dayInt >= 1 && dayInt <= 31;
     }
 
+    public List<JustifierEntity> getAllJustifiers() {
+        return justifierRepository.findAll();
+    }
+
     /*---------------*/
     /* REST TEMPLATE */
     /*---------------*/
@@ -68,9 +72,5 @@ public class JustifierService {
     public ClockModel findByDateAndEmployeeId(String date, Long id) {
         date = date.replace("/", "-");
         return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
-    }
-
-    public List<JustifierEntity> getAllJustifiers() {
-        return justifierRepository.findAll();
     }
 }
