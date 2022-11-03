@@ -157,7 +157,7 @@ class JustifierAndExtraHoursComponent extends Component {
                             </div>
                         </div>
                         <div className="text-center px-lg-5 pt-lg-3 pb-lg-4 p-4 mt-auto w-100">
-                            <Link to="/justifier-and-extra-hours" className="btn justifierandextrahours">Calcular planillas</Link>
+                            <Link to="/spreadsheet" className="btn justifierandextrahours">Calcular planillas</Link>
                         </div>
                     </div>
                 </div>
