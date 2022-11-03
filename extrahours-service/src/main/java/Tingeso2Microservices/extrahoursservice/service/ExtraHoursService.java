@@ -44,6 +44,10 @@ public class ExtraHoursService {
         return extraHoursRepository.findAll();
     }
 
+    public ExtraHoursEntity findByName(String name) {
+        return extraHoursRepository.findByName(name);
+    }
+
     /*---------------*/
     /* REST TEMPLATE */
     /*---------------*/

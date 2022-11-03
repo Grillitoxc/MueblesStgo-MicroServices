@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JustifierRepository extends JpaRepository<JustifierEntity, Long> {
+    JustifierEntity findByDateAndName(String date, String name);
 }

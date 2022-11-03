@@ -25,4 +25,11 @@ public class ExtraHoursController {
     public List<ExtraHoursEntity> getExtraHours() {
         return extraHoursService.getAllExtraHours();
     }
+
+    @GetMapping("/find_by_name/{name}")
+    public ResponseEntity<ExtraHoursEntity> findExtraHoursByName(@PathVariable("name") String name) {
+        name = name.replace("-", " ");
+        ExtraHoursEntity extraHours = extraHoursService.findByName(name);
+        return ResponseEntity.ok(extraHours);
+    }
 }

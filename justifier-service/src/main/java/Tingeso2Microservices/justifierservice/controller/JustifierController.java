@@ -28,4 +28,12 @@ public class JustifierController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(justifier);
     }
+
+    @GetMapping("/find_by_date_and_name/{date}/{name}")
+    public ResponseEntity<JustifierEntity> findJustifierByNameAndDate(@PathVariable("date") String date, @PathVariable("name") String name) {
+        name = name.replace("-", " ");
+        date = date.replace("-", "/");
+        JustifierEntity justifier = justifierService.findByDateAndName(date, name);
+        return ResponseEntity.ok(justifier);
+    }
 }

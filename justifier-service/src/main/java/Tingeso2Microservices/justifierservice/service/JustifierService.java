@@ -20,13 +20,19 @@ public class JustifierService {
     public void setJustifier(JustifierEntity justifier) {
         if (verifyDate(justifier.getDate()) && (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())) == null) ||
                 (findByDateAndEmployeeId(justifier.getDate(), findIdByName(justifier.getName())).getDiscount() == 15)) {
-            justifierRepository.save(justifier);
+            if (checkIfExist(justifier.getName(), justifier.getDate())) {
+                justifierRepository.save(justifier);
+            }
         }
     }
 
     /*--------------------------*/
     /* STANDARD SERVICE METHODS */
     /*--------------------------*/
+    public boolean checkIfExist(String name, String date) {
+        return findByDateAndName(date, name) == null;
+    }
+
     public boolean verifyDate(String dateImput) {
         if (dateImput.length() != 10)
             return false;
@@ -57,6 +63,10 @@ public class JustifierService {
 
     public List<JustifierEntity> getAllJustifiers() {
         return justifierRepository.findAll();
+    }
+
+    public JustifierEntity findByDateAndName(String date, String name) {
+        return justifierRepository.findByDateAndName(date, name);
     }
 
     /*---------------*/
