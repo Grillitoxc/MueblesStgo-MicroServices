@@ -6,10 +6,16 @@ import Tingeso2Microservices.spreadsheetservice.model.EmployeeModel;
 import Tingeso2Microservices.spreadsheetservice.model.ExtraHoursModel;
 import Tingeso2Microservices.spreadsheetservice.model.JustifierModel;
 import Tingeso2Microservices.spreadsheetservice.repository.SpreadsheetRepository;
+import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @Service
@@ -171,6 +177,8 @@ public class SpreadsheetService {
     /*---------------*/
     /* REST TEMPLATE */
     /*---------------*/
+    
+
     RestTemplate restTemplate = new RestTemplate();
 
     public EmployeeModel[] getAllEmployees() {

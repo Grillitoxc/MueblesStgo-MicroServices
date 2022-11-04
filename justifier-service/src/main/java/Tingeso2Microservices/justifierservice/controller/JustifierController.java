@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @RestController
@@ -15,6 +16,7 @@ public class JustifierController {
     JustifierService justifierService;
 
     @PostMapping
+    @RolesAllowed("rrhh")
     public ResponseEntity<JustifierEntity> saveJustifier(@RequestBody JustifierEntity justifier) {
         justifierService.setJustifier(justifier);
         System.out.println(justifier);
@@ -22,6 +24,7 @@ public class JustifierController {
     }
 
     @GetMapping
+    @RolesAllowed("rrhh")
     public ResponseEntity<List<JustifierEntity>> getJustifier() {
         List<JustifierEntity> justifier = justifierService.getAllJustifiers();
         if (justifier == null)
@@ -30,6 +33,7 @@ public class JustifierController {
     }
 
     @GetMapping("/find_by_date_and_name/{date}/{name}")
+    @RolesAllowed("rrhh")
     public ResponseEntity<JustifierEntity> findJustifierByNameAndDate(@PathVariable("date") String date, @PathVariable("name") String name) {
         name = name.replace("-", " ");
         date = date.replace("-", "/");

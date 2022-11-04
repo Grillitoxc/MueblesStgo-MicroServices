@@ -21,3 +21,10 @@ spring:
 
 file:
   upload-dir: ./src/main/resources/static/uploads
+
+keycloak:
+  realm: MueblesStgo-MicroServices
+  auth-server-url: http://localhost:8082
+  resource: gateway-service
+  public-client: true
+  bearer-only: true
