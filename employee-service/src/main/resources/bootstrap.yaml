@@ -5,16 +5,3 @@ spring:
     config:
       enabled: true
       uri: http://localhost:8081
-  datasource:
-    url: jdbc:postgresql://localhost:5432/mueblesstgo-employee
-    username: postgres
-    password: 93304596
-  jpa:
-    hibernate:
-      ddl-auto: update
-#keycloak:
-#  realm: MueblesStgo-MicroServices
-#  auth-server-url: http://localhost:8082
-#  resource: gateway-service
-#  public-client: true
-#  bearer-only: true
