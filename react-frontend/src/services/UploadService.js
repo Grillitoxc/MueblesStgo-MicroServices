@@ -11,7 +11,7 @@ function UploadService() {
             const formData = new FormData();
             formData.append("file", file);
             const API_URL = "http://localhost:8080/clock";
-            await axios.post(API_URL, formData);
+            await axios.post(API_URL, formData, {headers: {Authorization: 'Bearer ' + localStorage.getItem('bearer-token')}});
         } catch (err) {
             alert(err.message);
         }

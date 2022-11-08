@@ -5,9 +5,9 @@ import Tingeso2Microservices.spreadsheetservice.model.ClockModel;
 import Tingeso2Microservices.spreadsheetservice.model.EmployeeModel;
 import Tingeso2Microservices.spreadsheetservice.model.ExtraHoursModel;
 import Tingeso2Microservices.spreadsheetservice.model.JustifierModel;
+import Tingeso2Microservices.spreadsheetservice.repository.KeycloakRestTemplate;
 import Tingeso2Microservices.spreadsheetservice.repository.SpreadsheetRepository;
 import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
-import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -177,9 +177,8 @@ public class SpreadsheetService {
     /*---------------*/
     /* REST TEMPLATE */
     /*---------------*/
-    
-
-    RestTemplate restTemplate = new RestTemplate();
+    KeycloakClientRequestFactory factory = new KeycloakClientRequestFactory();
+    KeycloakRestTemplate restTemplate = new KeycloakRestTemplate(factory);
 
     public EmployeeModel[] getAllEmployees() {
         return restTemplate.getForObject("http://localhost:8080/employee", EmployeeModel[].class);

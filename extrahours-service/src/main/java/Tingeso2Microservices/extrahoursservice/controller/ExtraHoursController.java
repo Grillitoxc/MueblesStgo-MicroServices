@@ -16,7 +16,7 @@ public class ExtraHoursController {
     ExtraHoursService extraHoursService;
 
     @PostMapping
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public ResponseEntity<ExtraHoursEntity> saveExtraHours(@RequestBody ExtraHoursEntity extraHours) {
         extraHoursService.setExtraHours(extraHours);
         System.out.println(extraHours);
@@ -24,13 +24,13 @@ public class ExtraHoursController {
     }
 
     @GetMapping
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public List<ExtraHoursEntity> getExtraHours() {
         return extraHoursService.getAllExtraHours();
     }
 
     @GetMapping("/find_by_name/{name}")
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public ResponseEntity<ExtraHoursEntity> findExtraHoursByName(@PathVariable("name") String name) {
         name = name.replace("-", " ");
         ExtraHoursEntity extraHours = extraHoursService.findByName(name);

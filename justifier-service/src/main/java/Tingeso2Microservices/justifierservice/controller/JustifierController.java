@@ -16,7 +16,7 @@ public class JustifierController {
     JustifierService justifierService;
 
     @PostMapping
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public ResponseEntity<JustifierEntity> saveJustifier(@RequestBody JustifierEntity justifier) {
         justifierService.setJustifier(justifier);
         System.out.println(justifier);
@@ -24,7 +24,7 @@ public class JustifierController {
     }
 
     @GetMapping
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public ResponseEntity<List<JustifierEntity>> getJustifier() {
         List<JustifierEntity> justifier = justifierService.getAllJustifiers();
         if (justifier == null)
@@ -33,7 +33,7 @@ public class JustifierController {
     }
 
     @GetMapping("/find_by_date_and_name/{date}/{name}")
-    @RolesAllowed("rrhh")
+    //@RolesAllowed("rrhh")
     public ResponseEntity<JustifierEntity> findJustifierByNameAndDate(@PathVariable("date") String date, @PathVariable("name") String name) {
         name = name.replace("-", " ");
         date = date.replace("-", "/");

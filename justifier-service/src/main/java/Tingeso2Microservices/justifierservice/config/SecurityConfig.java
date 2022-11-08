@@ -1,5 +1,6 @@
 package Tingeso2Microservices.justifierservice.config;
 
+/*
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -41,3 +42,4 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
     }
 }
+ */
