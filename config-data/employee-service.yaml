@@ -1,5 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mueblesstgo-employee
+    username: postgres
+    password: 93304596
+  jpa:
+    hibernate:
+      ddl-auto: update
 server:
-  port: ${PORT:${SERVER_PORT:0}}
+  port: 8091
 eureka:
   client:
     fetch-registry: true
