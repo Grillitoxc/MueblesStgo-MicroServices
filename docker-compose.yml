@@ -6,9 +6,61 @@ services:
       image: postgres:latest
       restart: always
       ports:
-        - "5432:5432"
+        - "5431:5431"
       environment:
         - POSTGRES_DB=mueblesstgo-employee
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=93304596
+      volumes:
+        - /var/lib/postgresql/data
+
+  extrahours-db:
+      container_name: extrahours-db
+      image: postgres:latest
+      restart: always
+      ports:
+        - "5432:5432"
+      environment:
+        - POSTGRES_DB=mueblesstgo-extrahours
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=93304596
+      volumes:
+        - /var/lib/postgresql/data
+
+  justifier-db:
+      container_name: justifier-db
+      image: postgres:latest
+      restart: always
+      ports:
+        - "5434:5434"
+      environment:
+        - POSTGRES_DB=mueblesstgo-justifier
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=93304596
+      volumes:
+        - /var/lib/postgresql/data
+
+  clock-db:
+      container_name: clock-db
+      image: postgres:latest
+      restart: always
+      ports:
+        - "5435:5435"
+      environment:
+        - POSTGRES_DB=mueblesstgo-clock
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=93304596
+      volumes:
+        - /var/lib/postgresql/data
+
+  spreadsheet-db:
+      container_name: spreadsheet-db
+      image: postgres:latest
+      restart: always
+      ports:
+        - "5436:5436"
+      environment:
+        - POSTGRES_DB=mueblesstgo-spreadsheet
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=93304596
       volumes:
@@ -49,6 +101,28 @@ services:
       - config-service
       - eureka-service
       - employee-db
+    links:
+      - eureka-service
+
+  extrahours-service:
+    container_name: extrahours-service
+    image: grillitoxc/extrahoursservice:latest
+    ports:
+      - "8092:8092"
+    environment:
+      - spring.cloud.config.uri=http://config-service:8081
+      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://extrahours-db:5432/mueblesstgo-extrahours
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=93304596
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - config-service
+      - eureka-service
+      - extrahours-db
     links:
       - eureka-service
 
