@@ -1,11 +1,8 @@
 package Tingeso2Microservices.extrahoursservice.config;
 
-/*
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
-import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
-import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -40,19 +37,8 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .anyRequest().permitAll();
     }
-
-    // keycloackresttemplate
-
-
-    @Bean
-    public KeycloakRestTemplate keycloakRestTemplate(KeycloakClientRequestFactory keycloakClientRequestFactory) {
-        return new KeycloakRestTemplate(keycloakClientRequestFactory);
-    }
-
-
-
 }
-*/

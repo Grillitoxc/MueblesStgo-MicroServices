@@ -17,7 +17,7 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping
-    //@RolesAllowed("rrhh")
+    @RolesAllowed("rrhh")
     public ResponseEntity<List<EmployeeEntity>> getAll() {
         List<EmployeeEntity> employees = employeeService.getAllEmployees();
         if (employees.isEmpty())
@@ -26,7 +26,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find_id_by_rut/{rut}")
-    //@RolesAllowed("rrhh")
+    @RolesAllowed("rrhh")
     public ResponseEntity<Long> findIdByRut(@PathVariable("rut") String rut) {
         Long id = employeeService.findIdByRut(rut);
         if (id == null)
@@ -35,7 +35,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find_id_by_name/{name}")
-    //@RolesAllowed("rrhh")
+    @RolesAllowed("rrhh")
     public ResponseEntity<Long> findIdByName(@PathVariable("name") String name) {
         name = name.replace("-", " ");
         Long id = employeeService.findIdByName(name);
@@ -45,7 +45,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/insert")
-    //@RolesAllowed("rrhh")
+    @RolesAllowed("rrhh")
     public ResponseEntity<String> insert() {
         employeeService.insertEmployees();
         return ResponseEntity.ok("Insertados");
