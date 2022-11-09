@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: postgresql://employee-db:5432/mueblesstgo-employee
+    username: postgres
+    password: 93304596
   jpa:
     hibernate:
-      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      ddl-auto: auto
 keycloak:
   realm: MueblesStgo-MicroServices
   auth-server-url: http://host.docker.internal:8082
