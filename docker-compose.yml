@@ -1,41 +1,48 @@
-version: "3.8"
+version: "3.7"
 
 services:
-  config-service:
-    container_name: config-service
-    image: grillitoxc/configservice:latest
-    ports:
-      - 8081:8081
-
-  eureka-service:
-    container_name: eureka-service
-    image: grillitoxc/eurekaservice:latest
-    ports:
-      - 8761:8761
-
   employee-db:
       container_name: employee-db
       image: postgres:latest
       restart: always
       ports:
-        - 5432:5432
+        - "5432:5432"
       environment:
-        - POSTGRES_DB=MueblesStgo
+        - POSTGRES_DB=mueblesstgo-employee
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=93304596
-      depends_on:
-        - config-service
-        - eureka-service
       volumes:
         - /var/lib/postgresql/data
 
-  gateway-service:
-    container_name: gateway-service
-    image: grillitoxc/gatewayservice:latest
+  config-service:
+    container_name: config-service
+    image: grillitoxc/configservice:latest
     ports:
-      - 8080:8080
+      - "8081:8081"
+
+  eureka-service:
+    container_name: eureka-service
+    image: grillitoxc/eurekaservice:latest
+    ports:
+      - "8761:8761"
+    depends_on:
+      - config-service
     environment:
-      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - spring.cloud.config.uri=http://config-service:8081
+
+  employee-service:
+    container_name: employee-service
+    image: grillitoxc/employeeservice:latest
+    ports:
+      - "8091:8091"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://employee-db:5432/mueblesstgo-employee
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=93304596
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    deploy:
+      restart_policy:
+        condition: on-failure
     depends_on:
       - config-service
       - eureka-service
