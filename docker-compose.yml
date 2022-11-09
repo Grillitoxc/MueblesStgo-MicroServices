@@ -51,3 +51,22 @@ services:
       - employee-db
     links:
       - eureka-service
+
+  gateway-service:
+    container_name: gateway-service
+    image: grillitoxc/gatewayservice:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.cloud.config.uri=http://config-service:8081
+      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - config-service
+      - eureka-service
+      - employee-service
+      - employee-db
+    links:
+      - eureka-service
