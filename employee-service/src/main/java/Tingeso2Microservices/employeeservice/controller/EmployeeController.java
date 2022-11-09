@@ -43,4 +43,11 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(id);
     }
+
+    @GetMapping("/insert")
+    //@RolesAllowed("rrhh")
+    public ResponseEntity<String> insert() {
+        employeeService.insertEmployees();
+        return ResponseEntity.ok("Insertados");
+    }
 }
