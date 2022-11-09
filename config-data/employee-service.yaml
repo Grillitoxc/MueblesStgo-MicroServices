@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: postgresql://employee-db:5432/mueblesstgo-employee
+    url: postgresql://localhost:5432/mueblesstgo-employee
     username: postgres
     password: 93304596
   jpa:
