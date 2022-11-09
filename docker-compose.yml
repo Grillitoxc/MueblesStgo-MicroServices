@@ -5,33 +5,20 @@ services:
     container_name: config-service
     image: grillitoxc/configservice:latest
     ports:
-      - "8081:8081"
+      - 8081:8081
 
   eureka-service:
     container_name: eureka-service
     image: grillitoxc/eurekaservice:latest
     ports:
-      - "8761:8761"
-
-  gateway-service:
-    container_name: gateway-service
-    image: grillitoxc/gatewayservice:latest
-    ports:
-      - "8080:8080"
-    environment:
-      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
-    depends_on:
-      - config-service
-      - eureka-service
-    links:
-      - eureka-service
+      - 8761:8761
 
   employee-db:
       container_name: employee-db
       image: postgres:latest
       restart: always
       ports:
-        - "5432:5432"
+        - 5432:5432
       environment:
         - POSTGRES_DB=MueblesStgo
         - POSTGRES_USER=postgres
@@ -39,37 +26,19 @@ services:
       depends_on:
         - config-service
         - eureka-service
-        - gateway-service
       volumes:
         - /var/lib/postgresql/data
 
-  employee-service:
-    container_name: employee-service
-    image: grillitoxc/employeeservice:latest
+  gateway-service:
+    container_name: gateway-service
+    image: grillitoxc/gatewayservice:latest
     ports:
-      - "8091:8091"
+      - 8080:8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mueblesstgo-employee
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=93304596
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
-    deploy:
-      restart_policy:
-        condition: on-failure
     depends_on:
       - config-service
       - eureka-service
-      - gateway-service
       - employee-db
     links:
       - eureka-service
-
-  
-
-  
-
-  
-      
-      
-    
