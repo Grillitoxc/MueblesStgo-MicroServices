@@ -7,9 +7,9 @@ spring:
     hibernate:
       ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
 keycloak:
-  realm: MueblesStgo-MicroServices
+  realm: mueblesstgo-microservices-realm
   auth-server-url: http://host.docker.internal:8082
-  resource: gateway-service
+  resource: backend
   public-client: true
   bearer-only: true
 server:
