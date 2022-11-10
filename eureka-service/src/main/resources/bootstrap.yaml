@@ -3,7 +3,5 @@ spring:
     name: eureka-service
   cloud:
     config:
-      timeout: 10000
       enabled: true
       uri: http://localhost:8081
-      force-pull: true
