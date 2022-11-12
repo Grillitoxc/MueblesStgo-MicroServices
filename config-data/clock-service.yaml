@@ -6,6 +6,7 @@
 #   jpa:
 #     hibernate:
 #       ddl-auto: update
+spring:
   servlet:
     multipart:
       enabled: true
