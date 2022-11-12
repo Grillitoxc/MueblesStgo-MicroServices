@@ -2,6 +2,47 @@ spring:
   application:
     name: gateway-service
   cloud:
-    config:
-      enabled: true
-      uri: http://localhost:8081
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-origin-patterns: '*'
+            allowed-methods: "*"
+            allowed-headers: "*"
+            allow-credentials: true
+      routes:
+        - id: employee-service
+          uri: lb://employee-service
+          predicates:
+            - Path=/employee/**
+        - id: clock-service
+          uri: lb://clock-service
+          predicates:
+            - Path=/clock/**
+        - id: justifier-service
+          uri: lb://justifier-service
+          predicates:
+            - Path=/justifier/**
+        - id: extrahours-service
+          uri: lb://extrahours-service
+          predicates:
+            - Path=/extrahours/**
+        - id: spreadsheet-service
+          uri: lb://spreadsheet-service
+          predicates:
+            - Path=/spreadsheet/**
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://eureka-service:8761/eureka
+  instance:
+    hostname: localhost

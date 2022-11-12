@@ -1,10 +1,23 @@
 spring:
   application:
     name: extrahours-service
-  cloud:
-    config:
-      enabled: true
-      uri: http://localhost:8081
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mueblesstgo-extrahours
+    username: postgres
+    password: 93304596
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8092
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://eureka-service:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 keycloak:
   realm: MueblesStgo-MicroServices
   auth-server-url: http://localhost:8082

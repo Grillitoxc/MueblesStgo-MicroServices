@@ -1,10 +1,31 @@
 spring:
   application:
     name: clock-service
-  cloud:
-    config:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mueblesstgo-employee
+    username: postgres
+    password: 93304596
+  jpa:
+    hibernate:
+      ddl-auto: update
+  servlet:
+    multipart:
       enabled: true
-      uri: http://localhost:8081
+      file-size-threshold: 2KB
+      max-file-size: 10MB
+      max-request-size: 10MB
+server:
+  port: 8094
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://eureka-service:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+file:
+  upload-dir: ./src/main/resources/static/uploads
 keycloak:
   realm: MueblesStgo-MicroServices
   auth-server-url: http://localhost:8082

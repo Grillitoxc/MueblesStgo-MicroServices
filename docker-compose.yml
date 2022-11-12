@@ -66,12 +66,6 @@ services:
     volumes:
       - /var/lib/postgresql/data
 
-  config-service:
-    container_name: config-service
-    image: grillitoxc/configservice:latest
-    ports:
-      - "8081:8081"
-
   eureka-service:
     container_name: eureka-service
     image: grillitoxc/eurekaservice:latest
@@ -79,8 +73,6 @@ services:
       - "8761:8761"
     depends_on:
       - config-service
-    environment:
-      - spring.cloud.config.uri=http://config-service:8081
 
   employee-service:
     container_name: employee-service
@@ -88,7 +80,6 @@ services:
     ports:
       - "8091:8091"
     environment:
-      - spring.cloud.config.uri=http://config-service:8081
       - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:postgresql://employee-db:5432/mueblesstgo-employee
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -110,7 +101,6 @@ services:
     ports:
       - "8092:8092"
     environment:
-      - spring.cloud.config.uri=http://config-service:8081
       - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
       - SPRING_DATASOURCE_URL=jdbc:postgresql://extrahours-db:5432/mueblesstgo-extrahours
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -132,7 +122,6 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - spring.cloud.config.uri=http://config-service:8081
       - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
     deploy:
       restart_policy:
