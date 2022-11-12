@@ -1,17 +1,11 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/mueblesstgo-employee
+    username: postgres
+    password: 93304596
   jpa:
     hibernate:
-      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
-keycloak:
-  realm: mueblesstgo-microservices-realm
-  auth-server-url: http://host.docker.internal:8082
-  resource: backend
-  public-client: true
-  bearer-only: true
+      ddl-auto: update
 server:
   port: 8091
 eureka:

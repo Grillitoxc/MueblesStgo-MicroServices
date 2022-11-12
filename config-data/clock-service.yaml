@@ -1,11 +1,11 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/mueblesstgo-clock
+    username: postgres
+    password: 93304596
   jpa:
     hibernate:
-      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO}
+      ddl-auto: update
   servlet:
     multipart:
       enabled: true
@@ -14,12 +14,6 @@ spring:
       max-request-size: 10MB
 file:
   upload-dir: ./src/main/resources/static/uploads
-keycloak:
-  realm: MueblesStgo-MicroServices
-  auth-server-url: http://localhost:8082
-  resource: gateway-service
-  public-client: true
-  bearer-only: true
 server:
   port: 8094
 eureka:
