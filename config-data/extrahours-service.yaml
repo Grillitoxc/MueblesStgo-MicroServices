@@ -1,11 +1,11 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/mueblesstgo-extrahours
-    username: postgres
-    password: 93304596
-  jpa:
-    hibernate:
-      ddl-auto: update
+# spring:
+#   datasource:
+#     url: jdbc:postgresql://localhost:5432/mueblesstgo-extrahours
+#     username: postgres
+#     password: 93304596
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
 server:
   port: 8092
 eureka:
