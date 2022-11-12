@@ -5,10 +5,8 @@ spring:
     config:
       server:
         git:
-          timeout: 10000
           default-label: main
           uri: https://github.com/Grillitoxc/MueblesStgo-MicroServices
           search-paths: config-data
-          force-pull: true
   application:
     name: config-service

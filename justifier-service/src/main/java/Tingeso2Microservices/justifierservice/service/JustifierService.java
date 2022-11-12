@@ -3,6 +3,8 @@ package Tingeso2Microservices.justifierservice.service;
 import Tingeso2Microservices.justifierservice.entity.JustifierEntity;
 import Tingeso2Microservices.justifierservice.model.ClockModel;
 import Tingeso2Microservices.justifierservice.repository.JustifierRepository;
+import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -72,7 +74,8 @@ public class JustifierService {
     /*---------------*/
     /* REST TEMPLATE */
     /*---------------*/
-    RestTemplate restTemplate = new RestTemplate();
+    KeycloakClientRequestFactory factory = new KeycloakClientRequestFactory();
+    KeycloakRestTemplate restTemplate = new KeycloakRestTemplate(factory);
 
     public Long findIdByName(String name) {
         name = name.replace(" ", "-");
