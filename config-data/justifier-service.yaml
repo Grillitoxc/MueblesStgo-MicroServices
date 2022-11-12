@@ -1,11 +1,3 @@
-# spring:
-#   datasource:
-#     url: jdbc:postgresql://localhost:5432/mueblesstgo-justifier
-#     username: postgres
-#     password: 93304596
-#   jpa:
-#     hibernate:
-#       ddl-auto: update
 server:
   port: 8093
 eureka:
