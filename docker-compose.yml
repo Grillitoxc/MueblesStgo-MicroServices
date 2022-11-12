@@ -2,69 +2,69 @@ version: "3.8"
 
 services:
   employee-db:
-      container_name: employee-db
-      image: postgres:latest
-      restart: always
-      ports:
-        - "5431:5431"
-      environment:
-        - POSTGRES_DB=mueblesstgo-employee
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=93304596
-      volumes:
-        - /var/lib/postgresql/data
+    container_name: employee-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5431:5431"
+    environment:
+      - POSTGRES_DB=mueblesstgo-employee
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=93304596
+    volumes:
+      - /var/lib/postgresql/data
 
   extrahours-db:
-      container_name: extrahours-db
-      image: postgres:latest
-      restart: always
-      ports:
-        - "5432:5432"
-      environment:
-        - POSTGRES_DB=mueblesstgo-extrahours
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=93304596
-      volumes:
-        - /var/lib/postgresql/data
+    container_name: extrahours-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=mueblesstgo-extrahours
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=93304596
+    volumes:
+      - /var/lib/postgresql/data
 
   justifier-db:
-      container_name: justifier-db
-      image: postgres:latest
-      restart: always
-      ports:
-        - "5434:5434"
-      environment:
-        - POSTGRES_DB=mueblesstgo-justifier
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=93304596
-      volumes:
-        - /var/lib/postgresql/data
+    container_name: justifier-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5434:5434"
+    environment:
+      - POSTGRES_DB=mueblesstgo-justifier
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=93304596
+    volumes:
+      - /var/lib/postgresql/data
 
   clock-db:
-      container_name: clock-db
-      image: postgres:latest
-      restart: always
-      ports:
-        - "5435:5435"
-      environment:
-        - POSTGRES_DB=mueblesstgo-clock
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=93304596
-      volumes:
-        - /var/lib/postgresql/data
+    container_name: clock-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5435:5435"
+    environment:
+      - POSTGRES_DB=mueblesstgo-clock
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=93304596
+    volumes:
+      - /var/lib/postgresql/data
 
   spreadsheet-db:
-      container_name: spreadsheet-db
-      image: postgres:latest
-      restart: always
-      ports:
-        - "5436:5436"
-      environment:
-        - POSTGRES_DB=mueblesstgo-spreadsheet
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=93304596
-      volumes:
-        - /var/lib/postgresql/data
+    container_name: spreadsheet-db
+    image: postgres:latest
+    restart: always
+    ports:
+      - "5436:5436"
+    environment:
+      - POSTGRES_DB=mueblesstgo-spreadsheet
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=93304596
+    volumes:
+      - /var/lib/postgresql/data
 
   config-service:
     container_name: config-service
