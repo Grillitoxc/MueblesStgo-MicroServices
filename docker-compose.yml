@@ -195,7 +195,7 @@ services:
     container_name: react-frontend
     image: grillitoxc/reactfrontend:latest
     ports:
-      - "3000:3001"
+      - "3000:3000"
     deploy:
       restart_policy:
         condition: on-failure
