@@ -3,7 +3,7 @@ import * as Keycloak from 'keycloak-js';
 
 
 let initOptions = {
-    url: 'http://localhost:8082',
+    url: 'http://host.docker.internal:8082',
     realm: 'MueblesStgo-MicroServices',
     clientId: 'react-app',
     onLoad: 'login-required'

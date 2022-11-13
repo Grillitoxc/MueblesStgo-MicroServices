@@ -32,7 +32,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - "5434:5434"
+      - "5433:5433"
     environment:
       - POSTGRES_DB=mueblesstgo-justifier
       - POSTGRES_USER=postgres
@@ -45,7 +45,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - "5435:5435"
+      - "5434:5434"
     environment:
       - POSTGRES_DB=mueblesstgo-clock
       - POSTGRES_USER=postgres
@@ -58,7 +58,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - "5436:5436"
+      - "5435:5435"
     environment:
       - POSTGRES_DB=mueblesstgo-spreadsheet
       - POSTGRES_USER=postgres
@@ -71,8 +71,6 @@ services:
     image: grillitoxc/eurekaservice:latest
     ports:
       - "8761:8761"
-    depends_on:
-      - config-service
 
   employee-service:
     container_name: employee-service
@@ -89,7 +87,6 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - config-service
       - eureka-service
       - employee-db
     links:
@@ -110,9 +107,68 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - config-service
       - eureka-service
       - extrahours-db
+    links:
+      - eureka-service
+
+  justifier-service:
+    container_name: justifier-service
+    image: grillitoxc/justifierservice:latest
+    ports:
+      - "8093:8093"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://justifier-db:5432/mueblesstgo-justifier
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=93304596
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - eureka-service
+      - justifier-db
+    links:
+      - eureka-service
+
+  clock-service:
+    container_name: clock-service
+    image: grillitoxc/clockservice:latest
+    ports:
+      - "8094:8094"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://clock-db:5432/mueblesstgo-clock
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=93304596
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - eureka-service
+      - clock-db
+    links:
+      - eureka-service
+
+  spreadsheet-service:
+    container_name: spreadsheet-service
+    image: grillitoxc/spreadsheetservice:latest
+    ports:
+      - "8095:8095"
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://eureka-service:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://spreadsheet-db:5432/mueblesstgo-spreadsheet
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=93304596
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - eureka-service
+      - spreadsheet-db
     links:
       - eureka-service
 
@@ -127,9 +183,28 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - config-service
       - eureka-service
       - employee-service
       - employee-db
+      - extrahours-service
+      - extrahours-db
     links:
       - eureka-service
+
+  react-frontend:
+    container_name: react-frontend
+    image: grillitoxc/reactfrontend:latest
+    ports:
+      - "3000:3001"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - employee-service
+      - extrahours-service
+      - justifier-service
+      - clock-service
+      - spreadsheet-service
+      - gateway-service
+    links:
+      - gateway-service
