@@ -79,11 +79,11 @@ public class JustifierService {
 
     public Long findIdByName(String name) {
         name = name.replace(" ", "-");
-        return restTemplate.getForObject("http://localhost:8080/employee/find_id_by_name/" + name, Long.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/employee/find_id_by_name/" + name, Long.class);
     }
 
     public ClockModel findByDateAndEmployeeId(String date, Long id) {
         date = date.replace("/", "-");
-        return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
     }
 }

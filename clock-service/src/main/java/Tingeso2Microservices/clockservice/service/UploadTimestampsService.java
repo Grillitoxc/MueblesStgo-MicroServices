@@ -114,11 +114,11 @@ public class UploadTimestampsService {
     RestTemplate restTemplate = new RestTemplate();
 
     public Long findIdByRut(String rut) {
-        return restTemplate.getForObject("http://localhost:8080/employee/find_id_by_rut/" + rut, Long.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/employee/find_id_by_rut/" + rut, Long.class);
     }
 
     public ClockEntity findByDateAndEmployeeId(String date, Long id) {
         date = date.replace("/", "-");
-        return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockEntity.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockEntity.class);
     }
 }

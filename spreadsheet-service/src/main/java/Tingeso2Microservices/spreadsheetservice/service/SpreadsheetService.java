@@ -181,36 +181,36 @@ public class SpreadsheetService {
     KeycloakRestTemplate restTemplate = new KeycloakRestTemplate(factory);
 
     public EmployeeModel[] getAllEmployees() {
-        return restTemplate.getForObject("http://localhost:8080/employee", EmployeeModel[].class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/employee", EmployeeModel[].class);
     }
 
     public ExtraHoursModel findByName(String name) {
         name = name.replace(" ", "-");
-        return restTemplate.getForObject("http://localhost:8080/extrahours/find_by_name/" + name, ExtraHoursModel.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/extrahours/find_by_name/" + name, ExtraHoursModel.class);
     }
 
     public JustifierModel findByDateAndName(String date, String name) {
         date = date.replace("/", "-");
         name = name.replace(" ", "-");
-        return restTemplate.getForObject("http://localhost:8080/justifier/find_by_date_and_name/" + date + "/" + name, JustifierModel.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/justifier/find_by_date_and_name/" + date + "/" + name, JustifierModel.class);
     }
 
     public ClockModel findByDateAndEmployeeId(String date, Long id) {
         date = date.replace("/", "-");
-        return restTemplate.getForObject("http://localhost:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/clock/find_by_date_and_id/" + date + "/" + id, ClockModel.class);
     }
 
     public ClockModel setDiscountZero(String date, Long id) {
         date = date.replace("/", "-");
-        return restTemplate.getForObject("http://localhost:8080/clock/set_discount_zero/" + date + "/" + id, ClockModel.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/clock/set_discount_zero/" + date + "/" + id, ClockModel.class);
     }
 
     public Integer[] findDiscountsById(Long id) {
-        return restTemplate.getForObject("http://localhost:8080/clock/find_discounts_by_id/" + id, Integer[].class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/clock/find_discounts_by_id/" + id, Integer[].class);
     }
 
     public Long findIdByName(String name) {
         name = name.replace(" ", "-");
-        return restTemplate.getForObject("http://localhost:8080/employee/find_id_by_name/" + name, Long.class);
+        return restTemplate.getForObject("http://host.docker.internal:8080/employee/find_id_by_name/" + name, Long.class);
     }
 }
